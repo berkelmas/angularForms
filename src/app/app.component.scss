@@ -1,0 +1,11 @@
+input.ng-invalid.ng-touched {
+  border-left: 4px solid orangered;
+}
+
+input.ng-dirty {
+  background-color: #f7f7f7;
+}
+
+input.ng-valid.ng-touched {
+  border-left: 4px solid green;
+}

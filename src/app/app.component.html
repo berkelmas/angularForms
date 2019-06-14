@@ -1,20 +1,80 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
 
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12">
+      <form [formGroup]="defaultForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="projectLabel">Project Name</label>
+          <input
+            class="form-control"
+            id="projectLabel"
+            aria-describedby="projectHelp"
+            placeholder="Enter Project Name"
+            formControlName="projectName"
+            required
+            >
+          <!-- Hataları Buraya Bu Şekilde Yazdırıyoruz. -->
+          <div *ngIf="defaultForm.get('projectName').errors">
+            <small
+              id="projectHelp"
+              class="form-text text-muted"
+              *ngIf="defaultForm.get('projectName').errors.testAsName"
+              >Test Name Hatası...</small>
+
+            <small
+              id="projectHelp"
+              class="form-text text-muted"
+              *ngIf="defaultForm.get('projectName').errors.berkAsName"
+              >Async Berk Name Hatası</small>
+
+            <!-- Touched olmadan hata gösterilmemesi için && kullanıldı. -->
+            <small
+              id="projectHelp"
+              class="form-text text-muted"
+              *ngIf="defaultForm.get('projectName').errors.required && defaultForm.get('projectName').touched"
+              >Required Hatası</small>
+          </div>
+
+        </div>
+        <div class="form-group">
+          <label for="emailLabel">Email</label>
+          <input
+            class="form-control"
+            id="emailLabel"
+            placeholder="Enter Email"
+            formControlName="email"
+            required
+            email
+            >
+            <div *ngIf="defaultForm.get('email').errors">
+              <small
+                id="projectHelp"
+                class="form-text text-muted"
+                *ngIf="defaultForm.get('email').errors.email"
+                >Lütfen Geçerli Bir Email Girin...</small>
+
+              <small
+                id="projectHelp"
+                class="form-text text-muted"
+                *ngIf="defaultForm.get('email').errors.required && defaultForm.get('email').touched"
+                >Required Hatası</small>
+
+            </div>
+        </div>
+        <div class="form-group">
+          <label class="my-1 mr-2" for="projectStatusLabel">Project Status</label>
+          <select
+            class="custom-select my-1 mr-sm-2"
+            id="projectStatusLabel"
+            formControlName="projectStatus"
+            >
+            <option value="Stable">Stable</option>
+            <option value="Critical">Critical</option>
+            <option value="Finished">Finished</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
